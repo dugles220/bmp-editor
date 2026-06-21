@@ -1,5 +1,5 @@
 CC = gcc
-TARGET = bmp_editor 
+TARGET = bmp-editor 
 FLAGS = -fno-common -std=c11 -g -Wall -Werror -lpng -lm -Iinclude
 SRC_DIR = src
 OBJ_DIR = obj
