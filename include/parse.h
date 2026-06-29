@@ -19,6 +19,7 @@
 
 enum actions { no_action, squared_lines, rgbfilter, rotate, mirror, diag_mirror };
 enum to_display { dont_display, display };
+enum to_fill { dont_fill, fill };
 
 typedef struct {
     char *input_file;
@@ -32,7 +33,7 @@ typedef struct {
     int side_size;
     int thickness;
     RGB color;
-    int fill;
+    enum to_fill fill;
     RGB fill_color;
     int upsize;
 

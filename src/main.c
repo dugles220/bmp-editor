@@ -41,13 +41,13 @@ int main(int argc, char **argv)
     while ((opt = getopt_long(argc, argv, "ho:iI:SFRMDu:d:a:s:t:c:fC:n:v:", long_options, &option)) != -1) {
         switch (opt) {
             case 'h':
-                config.help = 1;
+                config.help = display;
                 break;
             case 'o':
                 config.output_file = optarg;
                 break;
             case 'i':
-                config.info = 1;
+                config.info = display;
                 break;
             case 'I':
                 config.input_file = optarg;
@@ -143,7 +143,7 @@ int main(int argc, char **argv)
                 }
                 break;
             case 'f':
-                config.fill = 1;
+                config.fill = fill;
                 break;
             case 'C':
                 if (sscanf(optarg, "%hhu.%hhu.%hhu", &config.fill_color.r, &config.fill_color.g,
