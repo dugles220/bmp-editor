@@ -1,4 +1,5 @@
 #include "../include/bmp_ops.h"
+#include "enums.h"
 
 #include <math.h>
 
@@ -63,13 +64,13 @@ BMP *bmp_rgb_filter(const BMP *bmp, char component, unsigned char value)
     enum spectrum color;
 
     switch (component) {
-        case 'r':
+        case red:
             color = RED;
             break;
-        case 'g':
+        case green:
             color = GREEN;
             break;
-        case 'b':
+        case blue:
             color = BLUE;
             break;
         default:

@@ -2,13 +2,10 @@
 #define PARSE_H
 
 #include "bmp_structs.h"
+#include "enums.h"
 
 #include <stdio.h>
 #include <string.h>
-
-#define RED "red"
-#define GREEN "green"
-#define BLUE "blue"
 
 #define ERR_INVALID_ARG 40
 #define ERR_INVALID_FILE 41
@@ -16,10 +13,6 @@
 #define ERR_COORDINATES 43
 #define ERR_SAME_FILES 44
 #define ERR_ACTION_FAILED 45
-
-enum actions { no_action, squared_lines, rgbfilter, rotate, mirror, diag_mirror };
-enum to_display { dont_display, display };
-enum to_fill { dont_fill, fill };
 
 typedef struct {
     char *input_file;
@@ -37,7 +30,7 @@ typedef struct {
     RGB fill_color;
     int upsize;
 
-    char component_name;
+    enum color component_name;
     int component_value;
 
     int angle;

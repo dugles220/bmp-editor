@@ -2,6 +2,10 @@
 #include "../include/bmp_io.h"
 #include "../include/bmp_ops.h"
 
+#define RED "red"
+#define GREEN "green"
+#define BLUE "blue"
+
 void print_manual()
 {
     printf("Usage: ./bmp-editor [ACTION] [OPTIONS] input_file\n\n");
@@ -216,11 +220,11 @@ void handle_io_files(Config *config, int optind, int argc, char **argv)
 void handle_comp_name(Config *config, const char *line)
 {
     if (strcmp(line, RED) == 0)
-        config->component_name = 'r';
+        config->component_name = red;
     else if (strcmp(line, GREEN) == 0)
-        config->component_name = 'g';
+        config->component_name = green;
     else if (strcmp(line, BLUE) == 0)
-        config->component_name = 'b';
+        config->component_name = blue;
     else {
         fprintf(stderr,
                 "main: invalid argument for --component_name: %s; "
