@@ -174,6 +174,11 @@ void execute_command(Config *config)
 
     if (config->info) {
         bmp_print_info(bmp);
+
+        if (config->action == no_action) {
+            bmp_free(bmp);
+            return;
+        }
     }
 
     BMP *copy = bmp;
