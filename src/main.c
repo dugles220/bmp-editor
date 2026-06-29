@@ -5,8 +5,6 @@
 
 int main(int argc, char **argv)
 {
-    printf("Course work for option 4.12, created by Kushaev Dmitrii 5387.\n");
-
     int opt;
     int option;
     Config config = {0};
