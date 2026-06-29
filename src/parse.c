@@ -4,7 +4,7 @@
 
 void print_manual()
 {
-    printf("Usage: ./cw [ACTION] [OPTIONS] input_file\n\n");
+    printf("Usage: ./bmp-editor [ACTION] [OPTIONS] input_file\n\n");
 
     printf("Actions:\n");
     printf("  -S, --squared_lines    draw a square with diagonals.\n");
