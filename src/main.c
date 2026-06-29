@@ -38,7 +38,7 @@ int main(int argc, char **argv)
 
         {0, 0, 0, 0}};
 
-    while ((opt = getopt_long(argc, argv, "ho:iI:SFRMu:d:a:s:t:c:fC:n:v:", long_options, &option)) != -1) {
+    while ((opt = getopt_long(argc, argv, "ho:iI:SFRMDu:d:a:s:t:c:fC:n:v:", long_options, &option)) != -1) {
         switch (opt) {
             case 'h':
                 config.help = 1;
