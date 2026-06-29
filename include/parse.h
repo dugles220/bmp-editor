@@ -17,13 +17,14 @@
 #define ERR_SAME_FILES 44
 #define ERR_ACTION_FAILED 45
 
+enum actions { no_action, squared_lines, rgbfilter, rotate, mirror, diag_mirror };
+
 typedef struct {
     char *input_file;
     char *output_file;
-    int info;   // считан ли файл
-    int help;   // нужно ли выводить справку
-    int action; // код выполняемого действия
-    // 1 - squared_lines, 2 - rgbfilter, 3 - rotate
+    int info; // считан ли файл
+    int help; // нужно ли выводить справку
+    enum actions action;
 
     int lu_x, lu_y;
     int rd_x, rd_y;

@@ -53,39 +53,39 @@ int main(int argc, char **argv)
                 config.input_file = optarg;
                 break;
             case 'S':
-                if (config.action != 0) {
+                if (config.action != no_action) {
                     fprintf(stderr, "main: mulitple action selected 1\n");
                     exit(ERR_MULTIPLE_ACTIONS);
                 }
-                config.action = 1;
+                config.action = squared_lines;
                 break;
             case 'F':
-                if (config.action != 0) {
+                if (config.action != no_action) {
                     fprintf(stderr, "main: mulitple action selected 2\n");
                     exit(ERR_MULTIPLE_ACTIONS);
                 }
-                config.action = 2;
+                config.action = rgbfilter;
                 break;
             case 'R':
-                if (config.action != 0) {
+                if (config.action != no_action) {
                     fprintf(stderr, "main: mulitple action selected 3\n");
                     exit(ERR_MULTIPLE_ACTIONS);
                 }
-                config.action = 3;
+                config.action = rotate;
                 break;
             case 'M':
-                if (config.action != 0) {
+                if (config.action != no_action) {
                     fprintf(stderr, "main: mulitple action selected 3\n");
                     exit(ERR_MULTIPLE_ACTIONS);
                 }
-                config.action = 6;
+                config.action = mirror;
                 break;
             case 'D':
-                if (config.action != 0) {
+                if (config.action != no_action) {
                     fprintf(stderr, "main: mulitple action selected 3\n");
                     exit(ERR_MULTIPLE_ACTIONS);
                 }
-                config.action = 7;
+                config.action = diag_mirror;
                 break;
             case 'u':
                 if (sscanf(optarg, "%d.%d", &config.lu_x, &config.lu_y) != 2) {

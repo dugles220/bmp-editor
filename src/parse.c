@@ -36,7 +36,7 @@ void print_manual()
 
 int check_config(Config *config)
 {
-    if (config->action == 1) {
+    if (config->action == squared_lines) {
         if (config->side_size <= 0) {
             fprintf(stderr, "check_config: invalid side_size value: %d.\n", config->side_size);
             return ERR_INVALID_ARG;
@@ -46,14 +46,14 @@ int check_config(Config *config)
             return ERR_INVALID_ARG;
         }
 
-        return 1;
+        return squared_lines;
     }
 
-    if (config->action == 2) {
-        return 2;
+    if (config->action == rgbfilter) {
+        return rgbfilter;
     }
 
-    if (config->action == 3) {
+    if (config->action == rotate) {
         int angle = config->angle;
 
         if (angle != 90 && angle != 180 && angle != 270) {
@@ -66,7 +66,7 @@ int check_config(Config *config)
 
         if (!(config->lu_x < config->rd_x) || !(config->lu_y < config->rd_y)) {
             fprintf(stderr, "check_config: zero width or height part.\n");
-            return 0;
+            return ERR_INVALID_ARG;
         }
 
         if (config->lu_x > config->rd_x || config->lu_y > config->rd_y) {
@@ -75,13 +75,13 @@ int check_config(Config *config)
             return ERR_INVALID_ARG;
         }
 
-        return 3;
+        return rotate;
     }
 
-    if (config->action == 6) {
+    if (config->action == mirror) {
         if (config->axis != 'x' && config->axis != 'y') {
             fprintf(stderr, "check_config: invalid axis argument: %c; x or y required.\n", config->axis);
-            return 0;
+            return ERR_INVALID_ARG;
         }
 
         size_t dy = config->rd_y - config->lu_y;
@@ -98,10 +98,10 @@ int check_config(Config *config)
             config->rd_y = config->lu_y + side_size;
         }
 
-        return 6;
+        return mirror;
     }
 
-    if (config->action == 7) {
+    if (config->action == diag_mirror) {
         size_t dy = config->rd_y - config->lu_y;
         size_t dx = config->rd_x - config->lu_x;
 
@@ -119,10 +119,10 @@ int check_config(Config *config)
             config->rd_y = config->lu_y + side_size;
         }
 
-        return 7;
+        return diag_mirror;
     }
 
-    return 0;
+    return no_action;
 }
 
 void clamp_coordinates(Config *config, const BMP *bmp)
@@ -228,15 +228,15 @@ void handle_comp_name(Config *config, const char *line)
 void make_action(Config *config, BMP *bmp, BMP **copy)
 {
     switch (config->action) {
-        case 1:
+        case squared_lines:
             draw_square(bmp->pixels, config->lu_x, config->lu_y, config->side_size, config->thickness,
                         config->fill, 1, &config->color, &config->fill_color);
 
             break;
-        case 2:
+        case rgbfilter:
             *copy = bmp_rgb_filter(bmp, config->component_name, config->component_value);
             break;
-        case 3:
+        case rotate:
 
             if (config->angle == 90)
                 config->angle = 1;
@@ -247,11 +247,11 @@ void make_action(Config *config, BMP *bmp, BMP **copy)
 
             *copy = bmp_rotate(bmp, config->lu_x, config->lu_y, config->rd_x, config->rd_y, config->angle);
             break;
-        case 6:
+        case mirror:
             size_t side_size = config->rd_y - config->lu_y;
             bmp_mirror(bmp->pixels, config->lu_x, config->lu_y, side_size, config->axis);
             break;
-        case 7:
+        case diag_mirror:
             side_size = config->rd_y - config->lu_y;
             bmp_diag_mirror(bmp->pixels, config->lu_x, config->lu_y, side_size);
             break;
