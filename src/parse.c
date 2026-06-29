@@ -154,9 +154,9 @@ void clamp_coordinates(Config *config, const BMP *bmp)
 
 void execute_command(Config *config)
 {
-    if (config->help) {
+    if (config->help == display) {
         print_manual();
-        if (config->action == 0 && config->info == 0)
+        if (config->action == no_action && config->info == dont_display)
             return;
     }
 
@@ -172,7 +172,7 @@ void execute_command(Config *config)
         exit(ERR_INVALID_ARG);
     }
 
-    if (config->info) {
+    if (config->info == display) {
         bmp_print_info(bmp);
 
         if (config->action == no_action) {
@@ -187,7 +187,7 @@ void execute_command(Config *config)
 
     if (copy != NULL) {
         bmp_write(copy, config->output_file);
-    } else if (config->action != 0) {
+    } else if (config->action != no_action) {
         fprintf(stderr, "execute_command: action %d failed.\n", config->action);
         bmp_free(bmp);
         exit(ERR_ACTION_FAILED);

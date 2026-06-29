@@ -18,12 +18,13 @@
 #define ERR_ACTION_FAILED 45
 
 enum actions { no_action, squared_lines, rgbfilter, rotate, mirror, diag_mirror };
+enum to_display { dont_display, display };
 
 typedef struct {
     char *input_file;
     char *output_file;
-    int info; // считан ли файл
-    int help; // нужно ли выводить справку
+    enum to_display info;
+    enum to_display help;
     enum actions action;
 
     int lu_x, lu_y;
