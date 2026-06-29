@@ -3,8 +3,6 @@
 
 #include "bmp_structs.h"
 #include "pixels.h"
-#include <stdio.h>
-#include <stdlib.h>
 
 size_t get_padding(const BMP *);
 int bmp_is_format_correct(const BMP *);
