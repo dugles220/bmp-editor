@@ -54,35 +54,35 @@ int main(int argc, char **argv)
                 break;
             case 'S':
                 if (config.action != no_action) {
-                    fprintf(stderr, "main: mulitple action selected 1\n");
+                    fprintf(stderr, "main: mulitple action selected\n");
                     exit(ERR_MULTIPLE_ACTIONS);
                 }
                 config.action = squared_lines;
                 break;
             case 'F':
                 if (config.action != no_action) {
-                    fprintf(stderr, "main: mulitple action selected 2\n");
+                    fprintf(stderr, "main: mulitple action selected\n");
                     exit(ERR_MULTIPLE_ACTIONS);
                 }
                 config.action = rgbfilter;
                 break;
             case 'R':
                 if (config.action != no_action) {
-                    fprintf(stderr, "main: mulitple action selected 3\n");
+                    fprintf(stderr, "main: mulitple action selected\n");
                     exit(ERR_MULTIPLE_ACTIONS);
                 }
                 config.action = rotate;
                 break;
             case 'M':
                 if (config.action != no_action) {
-                    fprintf(stderr, "main: mulitple action selected 3\n");
+                    fprintf(stderr, "main: mulitple action selected\n");
                     exit(ERR_MULTIPLE_ACTIONS);
                 }
                 config.action = mirror;
                 break;
             case 'D':
                 if (config.action != no_action) {
-                    fprintf(stderr, "main: mulitple action selected 3\n");
+                    fprintf(stderr, "main: mulitple action selected\n");
                     exit(ERR_MULTIPLE_ACTIONS);
                 }
                 config.action = diag_mirror;
