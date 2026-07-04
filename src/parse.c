@@ -11,31 +11,50 @@ void print_manual()
     printf("Usage: ./bmp-editor [ACTION] [OPTIONS] input_file\n\n");
 
     printf("Actions:\n");
-    printf("  -S, --squared_lines    draw a square with diagonals.\n");
-    printf("  -F, --rgbfilter        apply RGB component filter.\n");
-    printf("  -R, --rotate           rotate a specific area of the image.\n");
+    printf("  --squared_lines        draw a square with diagonals.\n");
+    printf("  --rgbfilter            apply RGB component filter.\n");
+    printf("  --rotate               rotate a specific area of the image.\n");
+    printf("  --mirror               mirror square area of the image\n");
+    printf("  --diag_mirror          mirror square area of the image diagonally\n");
+    printf("  --square_rhombus       draw filled squared rhombus\n");
     printf("  -i, --info             display BMP file information.\n");
     printf("  -h, --help             display this help message.\n\n");
 
-    printf("Square (-S):\n");
-    printf("  -u, --left_up x.y      top-left corner coordinates.\n");
-    printf("  -s, --side_size N      size of the square side (N > 0).\n");
-    printf("  -t, --thickness N      line thickness (N > 0).\n");
-    printf("  -c, --color r.g.b      line color (0-255).\n");
-    printf("  -f, --fill             enable filling.\n");
-    printf("  -C, --fill_color r.g.b filling color (0-255).\n\n");
+    printf("Square:\n");
+    printf("  --left_up x.y          top-left corner coordinates.\n");
+    printf("  --side_size N          size of the square side (N > 0).\n");
+    printf("  --thickness N          line thickness (N > 0).\n");
+    printf("  --color r.g.b          line color (0-255).\n");
+    printf("  --fill                 enable filling.\n");
+    printf("  --fill_color r.g.b     filling color (0-255).\n\n");
 
-    printf("RGB Filter (-F):\n");
-    printf("  -n, --component_name C target component (red, green, blue).\n");
-    printf("  -v, --component_value N new value for component (0-255).\n\n");
+    printf("RGB Filter:\n");
+    printf("  --component_name C     target component (red, green, blue).\n");
+    printf("  --component_value N    new value for component (0-255).\n\n");
 
-    printf("Rotate Options (-R):\n");
-    printf("  -u, --left_up x.y      top-left corner of the area.\n");
-    printf("  -d, --right_down x.y   bottom-right corner of the area.\n");
-    printf("  -a, --angle N          angle (90, 180, 270).\n\n");
+    printf("Rotate Options:\n");
+    printf("  --left_up x.y          top-left corner of the area.\n");
+    printf("  --right_down x.y       bottom-right corner of the area.\n");
+    printf("  --angle N              angle (90, 180, 270).\n\n");
+
+    printf("Mirror:\n");
+    printf("  --left_up x.y          top-left corner of the area.\n");
+    printf("  --right_down x.y       bottom-right corner of the area.\n");
+    printf("  --axis x               reflection axis.\n\n");
+
+    printf("Diagonal mirror:\n");
+    printf("  --left_up x.y          top-left corner of the area.\n");
+    printf("  --right_down x.y       bottom-right corner of the area.\n\n");
+
+    printf("Square rhombus:\n");
+    printf("  --upper_vertex x.y     upper vertex coordinates.\n");
+    printf("  --side_size N          size of the rhombus side (N > 0).\n");
+    printf("  --thickness N          line thickness (N > 0).\n");
+    printf("  --color r.g.b          line color (0-255).\n");
+    printf("  --fill_color r.g.b     filling color (0-255).\n\n");
 
     printf("General Options:\n");
-    printf("  -o, --output FILE      output file name (default: out.bmp).\n");
+    printf("  --output FILE          output file name (default: out.bmp).\n");
 }
 
 int check_config(Config *config)
