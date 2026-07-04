@@ -12,6 +12,5 @@ RGB **rotate_pixels(const RGB **, size_t, size_t);
 void free_pixels_arr(RGB **);
 void repaint_pixel(RGB *, const RGB *);
 void draw_pixel(Pixels *, int, int, int, const RGB *);
-size_t convert_index(const Pixels *pixels, size_t y);
 
 #endif

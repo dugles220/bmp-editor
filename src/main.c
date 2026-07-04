@@ -40,7 +40,7 @@ int main(int argc, char **argv)
 
         {0, 0, 0, 0}};
 
-    while ((opt = getopt_long(argc, argv, "ho:iI:SFRMDru:d:a:s:t:c:fU:C:n:v:", long_options, &option)) != -1) {
+    while ((opt = getopt_long(argc, argv, "ho:iI:SFRMDru:d:a:s:t:c:fU:C:n:v:A:", long_options, &option)) != -1) {
         switch (opt) {
             case 'h':
                 config.help = display;

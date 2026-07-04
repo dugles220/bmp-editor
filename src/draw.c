@@ -67,7 +67,7 @@ void draw_pixel(Pixels *pixels, int x, int y, int thickness, const RGB *color)
     for (int i = -radius; i <= radius; i++) {
         for (int j = -radius; j <= radius; j++) {
             if (i * i + j * j <= radius * radius) {
-                y_cord = convert_index(pixels, y + j);
+                y_cord = y + j;
                 x_cord = x + i;
                 if (check_coordinates(pixels, x_cord, y_cord)) {
                     pixel = &pix_arr[y_cord][x_cord];
@@ -122,19 +122,17 @@ void scanline_fill(Pixels *pixels, size_t x, size_t y, const RGB *fill_color, co
         int cur_x = p.x;
         int cur_y = p.y;
 
-        int converted_y = convert_index(pixels, cur_y);
-
         int left_x = cur_x;
-        while (left_x >= 0 && !are_colors_equal(&pix_arr[converted_y][left_x], bound_color) &&
-               !are_colors_equal(&pix_arr[converted_y][left_x], fill_color)) {
-            repaint_pixel(&pix_arr[converted_y][left_x], fill_color);
+        while (left_x >= 0 && !are_colors_equal(&pix_arr[cur_y][left_x], bound_color) &&
+               !are_colors_equal(&pix_arr[cur_y][left_x], fill_color)) {
+            repaint_pixel(&pix_arr[cur_y][left_x], fill_color);
             left_x--;
         }
 
         int right_x = cur_x + 1;
-        while (right_x < W && !are_colors_equal(&pix_arr[converted_y][right_x], bound_color) &&
-               !are_colors_equal(&pix_arr[converted_y][right_x], fill_color)) {
-            repaint_pixel(&pix_arr[converted_y][right_x], fill_color);
+        while (right_x < W && !are_colors_equal(&pix_arr[cur_y][right_x], bound_color) &&
+               !are_colors_equal(&pix_arr[cur_y][right_x], fill_color)) {
+            repaint_pixel(&pix_arr[cur_y][right_x], fill_color);
             right_x++;
         }
 
@@ -153,10 +151,9 @@ void check_line(FillStack *s, Pixels *pixels, size_t x_start, size_t x_end, int 
 
     RGB **pix_arr = pixels->pix_arr;
     int is_added = 0;
-    int converted_y = convert_index(pixels, y);
 
     for (size_t x = x_start; x < x_end; x++) {
-        RGB *curr_pixel = &pix_arr[converted_y][x];
+        RGB *curr_pixel = &pix_arr[y][x];
 
         if (!are_colors_equal(curr_pixel, bound_color) && !are_colors_equal(curr_pixel, fill_color)) {
             if (!is_added) {

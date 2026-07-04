@@ -221,7 +221,7 @@ void bmp_mirror(Pixels *p, size_t lu_x, size_t lu_y, size_t side_size, unsigned 
 
     if (axis == 'x') {
         for (size_t y = 0; y < side_size; y++) {
-            memcpy(mirrored[side_size - y - 1], &pixels[convert_index(p, y + lu_y)][lu_x],
+            memcpy(mirrored[side_size - y - 1], &pixels[y + lu_y][lu_x],
                    side_size * sizeof(RGB));
         }
 
@@ -229,7 +229,7 @@ void bmp_mirror(Pixels *p, size_t lu_x, size_t lu_y, size_t side_size, unsigned 
     } else if (axis == 'y') {
         for (size_t y = 0; y < side_size; y++) {
             for (size_t x = 0; x < side_size; x++) {
-                repaint_pixel(&mirrored[y][x], &pixels[convert_index(p, y + lu_y)][lu_x + side_size - x - 1]);
+                repaint_pixel(&mirrored[y][x], &pixels[y + lu_y][lu_x + side_size - x - 1]);
             }
         }
 
@@ -250,7 +250,7 @@ void bmp_diag_mirror(Pixels *p, size_t lu_x, size_t lu_y, size_t side_size)
 
     for (size_t y = 0; y < side_size; y++) {
         for (size_t x = 0; x < side_size; x++) {
-            repaint_pixel(&mirrored[x][y], &pixels[convert_index(p, y + lu_y)][x + lu_x]);
+            repaint_pixel(&mirrored[x][y], &pixels[y + lu_y][x + lu_x]);
         }
     }
 

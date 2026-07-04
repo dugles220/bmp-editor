@@ -15,7 +15,7 @@ RGB **save_pixels(const Pixels *pixels, size_t lu_x, size_t lu_y, size_t rd_x, s
 
     for (size_t y = 0; y < area_h; y++) {
         for (size_t x = 0; x < area_w; x++) {
-            size_t src_y = convert_index(pixels, lu_y + y);
+            size_t src_y = lu_y + y;
             size_t src_x = lu_x + x;
 
             new_pixels[y][x] = pixels_arr[src_y][src_x];
@@ -59,10 +59,8 @@ void write_pixels(Pixels *image, int lu_x, int lu_y, RGB **pixels, size_t h, siz
             int out_x = lu_x + (int)x;
             int out_y = lu_y + (int)y;
 
-            size_t final_y = convert_index(image, (size_t)out_y);
-
             if (out_x >= 0 && out_x < (int)image_W && out_y >= 0 && out_y < (int)image_H) {
-                image_pixels[final_y][out_x] = pixels[y][x];
+                image_pixels[out_y][out_x] = pixels[y][x];
             }
         }
     }
@@ -106,9 +104,4 @@ void repaint_pixel(RGB *pixel, const RGB *color)
     pixel->b = color->b;
     pixel->g = color->g;
     pixel->r = color->r;
-}
-
-size_t convert_index(const Pixels *pixels, size_t y)
-{
-    return (pixels->H - 1) - y;
 }
