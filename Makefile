@@ -1,6 +1,6 @@
 CC = gcc
 TARGET = bmp-editor 
-FLAGS = -fno-common -std=c11 -g -Wall -Werror -lpng -lm -Iinclude
+FLAGS = -fno-common -std=c11 -g -Wall -Werror -lm -Iinclude
 SRC_DIR = src
 OBJ_DIR = obj
 SOURCES = $(wildcard $(SRC_DIR)/*.c)
