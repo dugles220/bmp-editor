@@ -23,6 +23,7 @@ int main(int argc, char **argv)
         {"rotate", no_argument, 0, 'R'},
         {"mirror", no_argument, 0, 'M'},
         {"diag_mirror", no_argument, 0, 'D'},
+        {"square_rhombus", no_argument, 0, 'r'},
 
         {"left_up", required_argument, 0, 'u'},
         {"right_down", required_argument, 0, 'd'},
@@ -35,10 +36,11 @@ int main(int argc, char **argv)
         {"component_name", required_argument, 0, 'n'},
         {"component_value", required_argument, 0, 'v'},
         {"axis", required_argument, 0, 'A'},
+        {"upper_vertex", required_argument, 0, 'U'},
 
         {0, 0, 0, 0}};
 
-    while ((opt = getopt_long(argc, argv, "ho:iI:SFRMDu:d:a:s:t:c:fC:n:v:", long_options, &option)) != -1) {
+    while ((opt = getopt_long(argc, argv, "ho:iI:SFRMDru:d:a:s:t:c:fU:C:n:v:", long_options, &option)) != -1) {
         switch (opt) {
             case 'h':
                 config.help = display;
@@ -86,6 +88,22 @@ int main(int argc, char **argv)
                     exit(ERR_MULTIPLE_ACTIONS);
                 }
                 config.action = diag_mirror;
+                break;
+            case 'r':
+                if(config.action != no_action) {
+                    fprintf(stderr, "main: mulitple action selected\n");
+                    exit(ERR_MULTIPLE_ACTIONS);
+                }
+                config.action = square_rhombus;
+                break;
+            case 'U':
+                if (sscanf(optarg, "%d.%d", &config.uv_x, &config.uv_y) != 2) {
+                    fprintf(stderr,
+                            "main: invalid argument for --upper_vertex: %s; x.y "
+                            "required.\n",
+                            optarg);
+                    exit(ERR_INVALID_ARG);
+                }
                 break;
             case 'u':
                 if (sscanf(optarg, "%d.%d", &config.lu_x, &config.lu_y) != 2) {

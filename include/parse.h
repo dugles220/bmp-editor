@@ -23,6 +23,7 @@ typedef struct {
 
     int lu_x, lu_y;
     int rd_x, rd_y;
+    int uv_x, uv_y;
     int side_size;
     int thickness;
     RGB color;

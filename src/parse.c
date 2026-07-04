@@ -126,6 +126,15 @@ int check_config(Config *config)
         return diag_mirror;
     }
 
+    if(config->action == square_rhombus){
+        if(config->side_size <= 0) {
+            fprintf(stderr, "check_config: invalid side_size value: %d.\n", config->side_size);
+            return ERR_INVALID_ARG;
+        }
+
+        return square_rhombus;
+    }
+
     return no_action;
 }
 
@@ -263,6 +272,9 @@ void make_action(Config *config, BMP *bmp, BMP **copy)
         case diag_mirror:
             side_size = config->rd_y - config->lu_y;
             bmp_diag_mirror(bmp->pixels, config->lu_x, config->lu_y, side_size);
+            break;
+        case square_rhombus:
+            draw_square_rhombus(bmp->pixels, config->uv_x, config->uv_y, config->side_size, &config->color);
             break;
         default:
             fprintf(stderr, "execute_command: no action for %d.\n", config->action);
