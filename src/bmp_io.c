@@ -120,9 +120,9 @@ BMP *bmp_read(const char file_name[])
 
     size_t padding = get_padding(bmp);
 
-    for (size_t i = 0; i < H; i++) {
+    for (int i = H - 1; i >= 0; i--) {
         if (fread(arr[i], 1, W * sizeof(RGB), file) < (W * sizeof(RGB))) {
-            fprintf(stderr, "bmp_read: unexpected EOF at row %zu\n", i);
+            fprintf(stderr, "bmp_read: unexpected EOF at row %d\n", i);
             fclose(file);
             bmp_free(bmp);
             return NULL;
@@ -189,14 +189,14 @@ int bmp_write(const BMP *bmp, const char file_name[])
     }
 
     RGB **curr_arr = bmp->pixels->pix_arr;
-    size_t counter = 0;
+    int counter = bmp->info_header->height - 1;
 
     size_t padding = get_padding(bmp);
     size_t row_size = bmp->pixels->W * sizeof(RGB);
 
-    while (counter < bmp->pixels->H && curr_arr[counter] != NULL) {
-        if (fwrite(curr_arr[counter++], row_size, 1, file) != 1) {
-            fprintf(stderr, "bmp_write: pixels writing failed on iteration %zu\n", counter);
+    while (counter >= 0 && curr_arr[counter] != NULL) {
+        if (fwrite(curr_arr[counter--], row_size, 1, file) != 1) {
+            fprintf(stderr, "bmp_write: pixels writing failed on iteration %d\n", counter);
             fclose(file);
             return 0;
         }
