@@ -29,7 +29,6 @@ typedef struct {
     RGB color;
     enum to_fill fill;
     RGB fill_color;
-    int upsize;
 
     enum color component_name;
     int component_value;
