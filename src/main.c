@@ -3,6 +3,27 @@
 #include <getopt.h>
 #include <stdlib.h>
 
+enum {
+    OPT_SQUARED_LINES = 256,
+    OPT_RGBFILTER,
+    OPT_ROTATE,
+    OPT_MIRROR,
+    OPT_DIAG_MIRROR,
+    OPT_SQUARE_RHOMBUS,
+    OPT_LEFT_UP,
+    OPT_RIGHT_DOWN,
+    OPT_ANGLE,
+    OPT_SIDE_SIZE,
+    OPT_THICKNESS,
+    OPT_COLOR,
+    OPT_FILL,
+    OPT_FILL_COLOR,
+    OPT_COMP_NAME,
+    OPT_COMP_VALUE,
+    OPT_AXIS,
+    OPT_UPPER_VERTEX
+};
+
 int main(int argc, char **argv)
 {
     int opt;
@@ -18,30 +39,32 @@ int main(int argc, char **argv)
         {"info", no_argument, 0, 'i'},
         {"input", required_argument, 0, 'I'},
 
-        {"squared_lines", no_argument, 0, 'S'},
-        {"rgbfilter", no_argument, 0, 'F'},
-        {"rotate", no_argument, 0, 'R'},
-        {"mirror", no_argument, 0, 'M'},
-        {"diag_mirror", no_argument, 0, 'D'},
-        {"square_rhombus", no_argument, 0, 'r'},
+        {"squared_lines", no_argument, 0, OPT_SQUARED_LINES},
+        {"rgbfilter", no_argument, 0, OPT_RGBFILTER},
+        {"rotate", no_argument, 0, OPT_ROTATE},
+        {"mirror", no_argument, 0, OPT_MIRROR},
+        {"diag_mirror", no_argument, 0, OPT_DIAG_MIRROR},
+        {"square_rhombus", no_argument, 0, OPT_SQUARE_RHOMBUS},
 
-        {"left_up", required_argument, 0, 'u'},
-        {"right_down", required_argument, 0, 'd'},
-        {"angle", required_argument, 0, 'a'},
-        {"side_size", required_argument, 0, 's'},
-        {"thickness", required_argument, 0, 't'},
-        {"color", required_argument, 0, 'c'},
-        {"fill", no_argument, 0, 'f'},
-        {"fill_color", required_argument, 0, 'C'},
-        {"component_name", required_argument, 0, 'n'},
-        {"component_value", required_argument, 0, 'v'},
-        {"axis", required_argument, 0, 'A'},
-        {"upper_vertex", required_argument, 0, 'U'},
+        {"left_up", required_argument, 0, OPT_LEFT_UP},
+        {"right_down", required_argument, 0, OPT_RIGHT_DOWN},
+        {"angle", required_argument, 0, OPT_ANGLE},
+        {"side_size", required_argument, 0, OPT_SIDE_SIZE},
+        {"thickness", required_argument, 0, OPT_THICKNESS},
+        {"color", required_argument, 0, OPT_COLOR},
+        {"fill", no_argument, 0, OPT_FILL},
+        {"fill_color", required_argument, 0, OPT_FILL_COLOR},
+        {"component_name", required_argument, 0, OPT_COMP_NAME},
+        {"component_value", required_argument, 0, OPT_COMP_VALUE},
+        {"axis", required_argument, 0, OPT_AXIS},
+        {"upper_vertex", required_argument, 0, OPT_UPPER_VERTEX},
 
         {0, 0, 0, 0}};
 
-    while ((opt = getopt_long(argc, argv, "ho:iI:SFRMDru:d:a:s:t:c:fU:C:n:v:A:", long_options, &option)) != -1) {
+    while ((opt = getopt_long(argc, argv, "ho:iI:", long_options, &option)) != -1) {
+
         switch (opt) {
+
             case 'h':
                 config.help = display;
                 break;
@@ -54,49 +77,50 @@ int main(int argc, char **argv)
             case 'I':
                 config.input_file = optarg;
                 break;
-            case 'S':
+
+            case OPT_SQUARED_LINES:
                 if (config.action != no_action) {
                     fprintf(stderr, "main: mulitple action selected\n");
                     exit(ERR_MULTIPLE_ACTIONS);
                 }
                 config.action = squared_lines;
                 break;
-            case 'F':
+            case OPT_RGBFILTER:
                 if (config.action != no_action) {
                     fprintf(stderr, "main: mulitple action selected\n");
                     exit(ERR_MULTIPLE_ACTIONS);
                 }
                 config.action = rgbfilter;
                 break;
-            case 'R':
+            case OPT_ROTATE:
                 if (config.action != no_action) {
                     fprintf(stderr, "main: mulitple action selected\n");
                     exit(ERR_MULTIPLE_ACTIONS);
                 }
                 config.action = rotate;
                 break;
-            case 'M':
+            case OPT_MIRROR:
                 if (config.action != no_action) {
                     fprintf(stderr, "main: mulitple action selected\n");
                     exit(ERR_MULTIPLE_ACTIONS);
                 }
                 config.action = mirror;
                 break;
-            case 'D':
+            case OPT_DIAG_MIRROR:
                 if (config.action != no_action) {
                     fprintf(stderr, "main: mulitple action selected\n");
                     exit(ERR_MULTIPLE_ACTIONS);
                 }
                 config.action = diag_mirror;
                 break;
-            case 'r':
+            case OPT_SQUARE_RHOMBUS:
                 if(config.action != no_action) {
                     fprintf(stderr, "main: mulitple action selected\n");
                     exit(ERR_MULTIPLE_ACTIONS);
                 }
                 config.action = square_rhombus;
                 break;
-            case 'U':
+            case OPT_UPPER_VERTEX:
                 if (sscanf(optarg, "%d.%d", &config.uv_x, &config.uv_y) != 2) {
                     fprintf(stderr,
                             "main: invalid argument for --upper_vertex: %s; x.y "
@@ -105,7 +129,7 @@ int main(int argc, char **argv)
                     exit(ERR_INVALID_ARG);
                 }
                 break;
-            case 'u':
+            case OPT_LEFT_UP:
                 if (sscanf(optarg, "%d.%d", &config.lu_x, &config.lu_y) != 2) {
                     fprintf(stderr,
                             "main: invalid argument for --left_up: %s; x.y "
@@ -114,7 +138,7 @@ int main(int argc, char **argv)
                     exit(ERR_INVALID_ARG);
                 }
                 break;
-            case 'd':
+            case OPT_RIGHT_DOWN:
                 if (sscanf(optarg, "%d.%d", &config.rd_x, &config.rd_y) != 2) {
                     fprintf(stderr,
                             "main: invalid argument for --right_down: %s; x.y "
@@ -123,7 +147,7 @@ int main(int argc, char **argv)
                     exit(ERR_INVALID_ARG);
                 }
                 break;
-            case 'a':
+            case OPT_ANGLE:
                 if (sscanf(optarg, "%d", &config.angle) != 1) {
                     fprintf(stderr,
                             "main: invalid argument for --angle: %s; integer "
@@ -132,7 +156,7 @@ int main(int argc, char **argv)
                     exit(ERR_INVALID_ARG);
                 }
                 break;
-            case 's':
+            case OPT_SIDE_SIZE:
                 if (sscanf(optarg, "%d", &config.side_size) != 1) {
                     fprintf(stderr,
                             "main: invalid argument for --side_size: %s; "
@@ -141,7 +165,7 @@ int main(int argc, char **argv)
                     exit(ERR_INVALID_ARG);
                 }
                 break;
-            case 't':
+            case OPT_THICKNESS:
                 if (sscanf(optarg, "%d", &config.thickness) != 1) {
                     fprintf(stderr,
                             "main: invalid argument for --thickness: %s; "
@@ -150,7 +174,7 @@ int main(int argc, char **argv)
                     exit(ERR_INVALID_ARG);
                 }
                 break;
-            case 'c':
+            case OPT_COLOR:
                 if (sscanf(optarg, "%hhu.%hhu.%hhu", &config.color.r, &config.color.g, &config.color.b) !=
                     3) {
                     fprintf(stderr,
@@ -160,10 +184,10 @@ int main(int argc, char **argv)
                     exit(ERR_INVALID_ARG);
                 }
                 break;
-            case 'f':
+            case OPT_FILL:
                 config.fill = fill;
                 break;
-            case 'C':
+            case OPT_FILL_COLOR:
                 if (sscanf(optarg, "%hhu.%hhu.%hhu", &config.fill_color.r, &config.fill_color.g,
                            &config.fill_color.b) != 3) {
                     fprintf(stderr,
@@ -173,10 +197,10 @@ int main(int argc, char **argv)
                     exit(ERR_INVALID_ARG);
                 }
                 break;
-            case 'n':
+            case OPT_COMP_NAME:
                 handle_comp_name(&config, optarg);
                 break;
-            case 'v':
+            case OPT_COMP_VALUE:
                 if (sscanf(optarg, "%d", &config.component_value) != 1) {
                     fprintf(stderr,
                             "main: invalid argument for --component_value: %s; "
@@ -185,7 +209,7 @@ int main(int argc, char **argv)
                     exit(ERR_INVALID_ARG);
                 }
                 break;
-            case 'A':
+            case OPT_AXIS:
                 if (sscanf(optarg, "%c", &config.axis) != 1) {
                     fprintf(stderr,
                             "main: invalid argument for --axis: %s; "
