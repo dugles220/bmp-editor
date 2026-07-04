@@ -88,6 +88,17 @@ int check_config(Config *config)
             return ERR_INVALID_ARG;
         }
 
+        if (!(config->lu_x < config->rd_x) || !(config->lu_y < config->rd_y)) {
+            fprintf(stderr, "check_config: zero width or height part.\n");
+            return ERR_INVALID_ARG;
+        }
+
+        if (config->lu_x > config->rd_x || config->lu_y > config->rd_y) {
+            fprintf(stderr, "check_config: left-up coords must be smaller than "
+                            "right-down coords.\n");
+            return ERR_INVALID_ARG;
+        }
+
         size_t dy = config->rd_y - config->lu_y;
         size_t dx = config->rd_x - config->lu_x;
 
