@@ -40,11 +40,11 @@ typedef struct {
 } Config;
 
 void print_manual();
-void execute_command(Config *);
+void execute_command(Config *config);
 
-int check_config(Config *);
-void clamp_coordinates(Config *, const BMP *);
-void handle_comp_name(Config *, const char *);
+int check_config(Config *config);
+void clamp_coordinates(Config *config, const BMP *bmp);
+void handle_comp_name(Config *config, const char *component_name);
 void handle_io_files(Config *config, int optind, int argc, char **argv);
 void make_action(Config *config, BMP *bmp, BMP **copy);
 

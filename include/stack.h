@@ -19,10 +19,10 @@ typedef struct {
 } FillStack;
 
 FillStack *create_stack();
-void extend(FillStack *);
-void push(FillStack *, int, int);
-Point pop(FillStack *);
-int is_empty(FillStack *);
-void free_stack(FillStack *);
+void extend(FillStack *stack);
+void push(FillStack *stack, int x, int y);
+Point pop(FillStack *stack);
+int is_empty(FillStack *stack);
+void free_stack(FillStack *stack);
 
 #endif
