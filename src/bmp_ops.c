@@ -258,3 +258,15 @@ void bmp_diag_mirror(Pixels *p, size_t lu_x, size_t lu_y, size_t side_size)
 
     free_pixels_arr(mirrored);
 }
+
+void draw_square_rhombus(Pixels *p, int uv_x, int uv_y, size_t side_size, const RGB *color)
+{
+    int half_side = sqrt(side_size * side_size / 2);
+
+    draw_line(p, uv_x, uv_y, uv_x + half_side, uv_y + half_side, 1, color);
+    draw_line(p, uv_x, uv_y, uv_x - half_side, uv_y + half_side, 1, color);
+    draw_line(p, uv_x, uv_y + half_side * 2, uv_x + half_side, uv_y + half_side, 1, color);
+    draw_line(p, uv_x, uv_y + half_side * 2, uv_x - half_side, uv_y + half_side, 1, color);
+
+    scanline_fill(p, uv_x, uv_y + half_side, color, color);
+}
