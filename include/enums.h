@@ -1,3 +1,7 @@
+/**
+ * @file enums.h
+ * @brief Перечисления, используемые в коде для повышения читаемости
+*/
 #ifndef ENUMS_H
 #define ENUMS_H
 /**
