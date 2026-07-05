@@ -5,3 +5,6 @@ out.bmp
 .vscode/
 html/
 latex/
+libbmp.a
+bmp-editor
+bmp-editor_s
