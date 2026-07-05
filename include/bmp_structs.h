@@ -1,3 +1,8 @@
+/**
+ * @file bmp_structs.h
+ * @brief Набор структур для хранения информации об изображении формата BMP
+ */
+
 #ifndef BMP_STRUCTS_H
 #define BMP_STRUCTS_H
 
@@ -5,6 +10,10 @@
 
 #pragma pack(push, 1)
 
+/**
+ * @brief Структура заголовка BitmapFileHeader формата BMP
+ * 
+ */
 typedef struct {
     uint16_t signature;
     uint32_t filesize;
@@ -14,6 +23,10 @@ typedef struct {
 
 } BitmapFileHeader;
 
+/**
+ * @brief Структура заголовка BitmapInfoHeader формата BMP
+ * 
+ */
 typedef struct {
     uint32_t headerSize;
     uint32_t width;
@@ -31,25 +44,41 @@ typedef struct {
 
 #pragma pack(pop)
 
+/**
+ * @brief Структура, хранящая информацию об одном пикселе 
+ * 
+ * Хранит значения каждой из RGB компоненты цвета.
+ * 
+ */
 typedef struct {
-    unsigned char b;
-    unsigned char g;
-    unsigned char r;
+    unsigned char b; ///< Компонента blue 
+    unsigned char g; ///< Компонента green
+    unsigned char r; ///< Компонента red
 
 } RGB;
-
+/**
+ * @brief Структура, представляющая из себя полотно пикселей
+ * 
+ * Хранит высоту, ширину и двумерный массив структур RGB.
+ * 
+ */
 typedef struct {
-    RGB **pix_arr;
+    RGB **pix_arr; ///< Двумерный массив структур RGB (пикселей)
 
-    uint32_t H;
-    uint32_t W;
+    uint32_t H; ///< Высота полотна
+    uint32_t W; ///< Ширина полотна
 
 } Pixels;
-
+/**
+ * @brief Главная структура, представляющая изображение формата BMP
+ * 
+ * Хранит полотно пикселей и структуры заголовков формата BMP.
+ * 
+ */
 typedef struct {
-    Pixels *pixels;
-    BitmapFileHeader *file_header;
-    BitmapInfoHeader *info_header;
+    Pixels *pixels; ///< Полотно пикселей
+    BitmapFileHeader *file_header; ///< Заголовок File BMP 
+    BitmapInfoHeader *info_header; ///< Заголовок Info BMP
 } BMP;
 
 #endif
